@@ -63,7 +63,9 @@ a DNS name.
     Both are real OIDC providers, so they can skip Dex entirely — and the
     redirect URI you register differs accordingly. Per-provider click-paths,
     connector YAML and gotchas:
-    [OAuth / OIDC Clients](../developer/oauth-clients.md).
+    [OAuth / OIDC Clients](../developer/oauth-clients.md). To accept all
+    three on one k0s cluster, each with its own username prefix, see
+    [All three on one cluster](../developer/oauth-clients.md#all-three-on-one-cluster).
 
 [github.com/settings/developers](https://github.com/settings/developers) →
 **New OAuth App** (an OAuth App, *not* a GitHub App — they are different
@@ -172,20 +174,21 @@ A browser opens, GitHub asks you to authorize the app, and `kubectl` ends up
 holding an ID token. The command prints who you now are:
 
 ```text
-==> You are 'oidc:octocat' to this API server.
+==> You are 'github:octocat' to this API server.
 ==> A claim you create must set spec.subject.id to exactly that.
 ```
 
 The username comes from Dex's `preferred_username` claim — your GitHub login
-— with an `oidc:` prefix added by the API server. The login step also
+— with a `github:` prefix added by the API server. The login step also
 rewrites the policy's issuer allowlist to this cluster's real issuer, since
 the shipped value is a placeholder.
 
 ### On an existing k0s cluster instead
 
 `scripts/dev-oidc-k0s.sh` does the same thing on a k0s cluster with the same
-issuer URL. What differs is how it gets there, and the identities: on k0s they
-are `github:<login>` rather than `oidc:<login>` (set with `PREFIX`).
+issuer URL. What differs is how it gets there. Identities are
+`github:<login>` on both (`PREFIX` on k0s), and the k0s script sets the
+policy's `usernamePrefix` to match.
 
 ```sh
 export BANLIEUE_GITHUB_APP_CLIENT_ID=... BANLIEUE_GITHUB_APP_CLIENT_SECRET=...
@@ -271,12 +274,12 @@ make dev-oidc-try-claim
 Two claims, as you, one of them dishonest:
 
 ```text
-==> 1/2 a claim naming YOU (oidc:octocat) — expect this to be accepted
+==> 1/2 a claim naming YOU (github:octocat) — expect this to be accepted
 virtualmachineclaim.banlieue.io/mine created (server dry run)
 
 ==> 2/2 the same claim naming SOMEBODY ELSE — expect Forbidden
 Error from server (Forbidden): ... denied request: spec.subject.id is
-oidc:somebody-else but you are authenticated as oidc:octocat. A claim
+github:somebody-else but you are authenticated as github:octocat. A claim
 records who a sandbox VM was handed to, so it may only name its own
 creator — otherwise the audit trail says whatever the author typed.
 ```
@@ -294,13 +297,13 @@ kind: VirtualMachineClaim
 metadata: { name: mine, namespace: banlieue-system }
 spec:
   poolRef: { name: sandbox-pool }
-  subject: { issuer: "https://127.0.0.1:32000/dex", id: "oidc:octocat" }
+  subject: { issuer: "https://127.0.0.1:32000/dex", id: "octocat" }
   ttlSeconds: 900
 EOF
 
 kubectl --context banlieue-oidc -n banlieue-system \
   patch vmclaim mine --type=merge \
-  -p '{"spec":{"subject":{"issuer":"https://127.0.0.1:32000/dex","id":"oidc:someone"}}}'
+  -p '{"spec":{"subject":{"issuer":"https://127.0.0.1:32000/dex","id":"someone"}}}'
 # Forbidden: spec.subject is immutable
 ```
 
@@ -317,7 +320,7 @@ id check, because a broker that could only name itself could not broker.
 
 ```sh
 kubectl -n banlieue-system patch configmap banlieue-claim-subject-policy \
-  --type=merge -p '{"data":{"brokers":"oidc:octocat\n"}}'
+  --type=merge -p '{"data":{"brokers":"github:octocat\n"}}'
 ```
 
 Re-run `make dev-oidc-try-claim` and the second claim is now **accepted** —
