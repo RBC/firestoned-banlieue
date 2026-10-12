@@ -1,14 +1,14 @@
 # anatomy.md
 
-> Auto-maintained by OpenWolf. Last scanned: 2026-10-12T13:19:47.664Z
-> Files: 512 tracked | Anatomy hits: 0 | Misses: 0
+> Auto-maintained by OpenWolf. Last scanned: 2026-10-12T22:00:00.751Z
+> Files: 511 tracked | Anatomy hits: 0 | Misses: 0
 
 ## ./
 
 - `.dockerignore` — Build-context allowlist: only binaries/ is COPYed; .git/target/docs excluded (SEC-017) (~193 tok)
 - `.gitignore` — Git ignore rules (~573 tok)
 - `AGENTS.md` — OpenWolf (~174 tok)
-- `Cargo.toml` — Rust package manifest (~1784 tok)
+- `Cargo.toml` — Rust package manifest (~1824 tok)
 - `CHANGELOG.md` — Change log (~2226 tok)
 - `cliff.toml` — SPDX-License-Identifier: Apache-2.0 (~699 tok)
 - `CODE_OF_CONDUCT.md` — Contributor Covenant Code of Conduct (~1470 tok)
@@ -23,7 +23,7 @@
 - `NOTICE` (~159 tok)
 - `osv-scanner.toml` — SPDX-License-Identifier: Apache-2.0 (~355 tok)
 - `README.md` — Project documentation (~3324 tok)
-- `ROADMAPS.md` — Roadmaps (~4259 tok)
+- `ROADMAPS.md` — Roadmaps (~4262 tok)
 - `SECURITY.md` — Security Policy (~382 tok)
 
 ## .clusterfuzzlite/
@@ -68,7 +68,7 @@
 - `14-live-migration.md` — Live Migration (same-class first, cross-class deferred) (~3286 tok)
 - `15-vsphere-disk-image-import.md` — 15: vSphere disk-image import (raw and VMDK), alongside the ISO path (~4709 tok)
 - `16-scorecard-remediation.md` — 60 — OSSF Scorecard remediation (~2608 tok)
-- `17-ephemeral-vm-pools.md` — 17: Ephemeral, single-use VM pools (AI agent sandboxes) (~13561 tok)
+- `17-ephemeral-vm-pools.md` — 17: Ephemeral, single-use VM pools (AI agent sandboxes) (~13573 tok)
 - `18-split-image-fast-clone.md` — 18: Split-image fast clone — verified base + per-VM sealed volume (~4187 tok)
 - `19-port-groups.md` — 19: Port groups — declared, reconciled, and safe to delete (~4109 tok)
 - `README.md` — Project documentation (~1406 tok)
@@ -124,7 +124,7 @@
 
 ## crates/banlieue-api/
 
-- `Cargo.toml` — Rust package manifest (~260 tok)
+- `Cargo.toml` — Rust package manifest (~284 tok)
 
 ## crates/banlieue-api/src/
 
@@ -134,7 +134,9 @@
 - `crddoc.rs` — Render banlieue CRDs as a single Markdown API-reference page. (~3378 tok)
 - `crdgen_support_tests.rs` — Tests for the crdgen post-generation fix-ups. (~1351 tok)
 - `crdgen_support.rs` — Post-generation fix-ups applied to CRDs by the `crdgen` binary. (~1633 tok)
-- `lib.rs` — API types and CRD generation for **banlieue**, a Kubernetes-native (~592 tok)
+- `lib.rs` — API types and CRD generation for **banlieue**, a Kubernetes-native (~626 tok)
+- `yaml_tests.rs` — Unit tests for `yaml.rs`. (~601 tok)
+- `yaml.rs` — YAML output for everything banlieue writes (CRDs, bootstrap manifests, (~660 tok)
 
 ## crates/banlieue-api/src/banlieue/
 
@@ -157,7 +159,7 @@
 ## crates/banlieue-api/src/bin/
 
 - `crddoc.rs` — Generate the Markdown API reference for every banlieue CRD. (~626 tok)
-- `crdgen.rs` — Emit every banlieue CRD as YAML. (~998 tok)
+- `crdgen.rs` — Emit every banlieue CRD as YAML. (~1000 tok)
 
 ## crates/banlieue-api/src/infrastructure/
 
@@ -175,7 +177,7 @@
 
 ## crates/banlieue-api/tests/
 
-- `examples.rs` — Every `examples/*.yaml` must parse into the types it names. (~2158 tok)
+- `examples.rs` — Every `examples/*.yaml` must parse into the types it names. (~2324 tok)
 
 ## crates/banlieue-cloud-hypervisor/
 
@@ -294,14 +296,14 @@
 
 ## crates/banlieue-imagebuilder/
 
-- `Cargo.toml` — Rust package manifest (~392 tok)
+- `Cargo.toml` — Rust package manifest (~399 tok)
 
 ## crates/banlieue-imagebuilder/src/
 
 - `app_tests.rs` — Unit tests for [`super::super::app`]. (~1282 tok)
 - `app.rs` — # `banlieue imagebuilder` entry point (~3990 tok)
-- `cloud_config_merge_tests.rs` — Unit tests for `cloud_config_merge.rs` (ADR-0037). (~2264 tok)
-- `cloud_config_merge.rs` — Cloud-config YAML deep-merge (ADR-0037). (~1642 tok)
+- `cloud_config_merge_tests.rs` — Unit tests for `cloud_config_merge.rs` (ADR-0037). (~2256 tok)
+- `cloud_config_merge.rs` — Cloud-config YAML deep-merge (ADR-0037). (~1586 tok)
 - `context.rs` — Shared reconcile context for `banlieue-imagebuilder`. (~535 tok)
 - `error_tests.rs` — Unit tests for [`super::super::error`]: the metric `kind` of each variant. (~175 tok)
 - `error.rs` — Typed errors for `banlieue-imagebuilder`'s reconciler. (~389 tok)
@@ -372,14 +374,14 @@
 
 ## crates/banlieue-operator/
 
-- `Cargo.toml` — Rust package manifest (~373 tok)
+- `Cargo.toml` — Rust package manifest (~380 tok)
 
 ## crates/banlieue-operator/src/
 
 - `app_tests.rs` — Unit tests for `app.rs` — flag parsing + leader config. (~1015 tok)
 - `app.rs` — # `banlieue operator` entry point (~3214 tok)
-- `bootstrap_tests.rs` — Unit tests for `bootstrap.rs`. (~17981 tok)
-- `bootstrap.rs` — `banlieue bootstrap` — self-contained cluster install (ADR-0013). (~16807 tok)
+- `bootstrap_tests.rs` — Unit tests for `bootstrap.rs`. (~17984 tok)
+- `bootstrap.rs` — `banlieue bootstrap` — self-contained cluster install (ADR-0013). (~16811 tok)
 - `context.rs` — Shared reconcile context (client + operator namespace). (~966 tok)
 - `error_tests.rs` — Unit tests for [`super::super::error`]: the metric `kind` of each variant. (~197 tok)
 - `error.rs` — Typed errors for `banlieue-operator`. (~372 tok)
@@ -407,7 +409,7 @@
 - `e2e_provider_pause.rs` — Pause semantics: `spec.paused` on a `Provider`, and on the `ProviderClass` (~1349 tok)
 - `e2e_provider_workload.rs` — The workload a `Provider` produces: creation, shape, ownership, status, (~4804 tok)
 - `e2e_workload_namespace.rs` — The `workloadNamespace` override — the riskiest branch in the design (~1879 tok)
-- `network_policies.rs` — Pins the shape of the opt-in NetworkPolicy templates in (~5115 tok)
+- `network_policies.rs` — Pins the shape of the opt-in NetworkPolicy templates in (~5298 tok)
 
 ## crates/banlieue-operator/tests/e2e_common/
 
@@ -733,13 +735,13 @@
 
 ## deploy/crds/
 
-- `banlieue.io_providerclasses.yaml` — K8s CustomResourceDefinition: providerclasses.banlieue.io (~7486 tok)
+- `banlieue.io_providerclasses.yaml` — K8s CustomResourceDefinition: providerclasses.banlieue.io (~7715 tok)
 - `banlieue.io_providers.yaml` — K8s CustomResourceDefinition: providers.banlieue.io (~10600 tok)
 - `banlieue.io_virtualmachineclaims.yaml` — K8s CustomResourceDefinition: virtualmachineclaims.banlieue.io (~2995 tok)
 - `banlieue.io_virtualmachinepools.yaml` — K8s CustomResourceDefinition: virtualmachinepools.banlieue.io (~9412 tok)
 - `banlieue.io_virtualmachines.yaml` — K8s CustomResourceDefinition: virtualmachines.banlieue.io (~8886 tok)
 - `banlieue.io_vmclasses.yaml` — K8s CustomResourceDefinition: vmclasses.banlieue.io (~4000 tok)
-- `banlieue.io_vmimages.yaml` — K8s CustomResourceDefinition: vmimages.banlieue.io (~10920 tok)
+- `banlieue.io_vmimages.yaml` — K8s CustomResourceDefinition: vmimages.banlieue.io (~10922 tok)
 - `infrastructure.banlieue.io_cloudhypervisormachines.yaml` — K8s CustomResourceDefinition: cloudhypervisormachines.infrastructure.banlieue.io (~4992 tok)
 - `infrastructure.banlieue.io_cloudhypervisormachinetemplates.yaml` — K8s CustomResourceDefinition: cloudhypervisormachinetemplates.infrastructure.banlieue.io (~3603 tok)
 - `infrastructure.banlieue.io_libvirtmachines.yaml` — K8s CustomResourceDefinition: libvirtmachines.infrastructure.banlieue.io (~6684 tok)
@@ -760,9 +762,3 @@
 - `configmap.yaml` — SPDX-License-Identifier: Apache-2.0 (~398 tok)
 - `deployment.yaml` — SPDX-License-Identifier: Apache-2.0 (~838 tok)
 - `namespace.yaml` — SPDX-License-Identifier: Apache-2.0 (~409 tok)
-- `service.yaml` — SPDX-License-Identifier: Apache-2.0 (~163 tok)
-
-## deploy/imagebuilder/rbac/
-
-- `clusterrole-import.yaml` — SPDX-License-Identifier: Apache-2.0 (~516 tok)
-- `clusterrole.yaml` — SPDX-License-Identifier: Apache-2.0 (~1082 tok)
